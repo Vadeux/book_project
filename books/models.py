@@ -74,6 +74,10 @@ class Book(models.Model):
 		"""String representation."""
 		return self.title
 
+	def get_review(self):
+		"""White spaces for responds."""
+		return self.reviews_set.filter(parent__isnull=True)
+
 	class Meta:
 		verbose_name = "Book"
 		verbose_name_plural = "Books"
