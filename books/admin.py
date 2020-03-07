@@ -1,4 +1,6 @@
 from django.contrib import admin
+from django.utils.safestring import mark_safe  # Use to show string as HTML code.
+
 from .models import Category, Genre, Book, Reviews, Rating, RatingStar, Author, BookShots
 
 
@@ -17,17 +19,30 @@ class ReviewInline(admin.TabularInline):
 	readonly_fields = ('name', 'email',)
 
 
+class BookShotsInline(admin.TabularInline):
+	"""Add book shots in book."""
+	model = BookShots
+	extra = 1
+	readonly_fields = ('get_image',)
+
+	def get_image(self, obj):
+		"""Show mini photo of book."""
+		return mark_safe(f'<img src={obj.image.url} width="100" height="110"')
+
+	get_image.short_description = 'Image'
+
+
 @admin.register(Book)
 class BookAdmin(admin.ModelAdmin):
-	list_display = ('id', 'title', 'category', 'draft',)
+	list_display = ('id', 'title', 'category', 'get_poster', 'draft',)
 	list_display_links = ('id', 'title',)
 	list_filter = ('category', 'authors')
+	readonly_fields = ('get_poster',)
 	search_fields = ('title', 'category__name')
-	inlines = [ReviewInline]  # for add reviews to books.
+	inlines = [BookShotsInline, ReviewInline]  # for add reviews and shots in books.
 	save_on_top = True  # Menu on top.
 	save_as = True  # Save as new object.
 	list_editable = ('draft',)  # Can edit in list of books.
-	# fields = (('authors', 'genres'),)
 	fieldsets = (
 		(None, {
 			'fields': (('title',),)
@@ -39,7 +54,7 @@ class BookAdmin(admin.ModelAdmin):
 			'fields': (('year',),)
 		}),
 		(None, {
-			'fields': (('description', 'poster'),)
+			'fields': (('description', 'poster', 'get_poster'),)
 		}),
 		('Selling info', {
 			'fields': (('publishing_house', 'cover_type', 'number_of_pages', 'price'),)
@@ -49,6 +64,12 @@ class BookAdmin(admin.ModelAdmin):
 		}),
 
 	)
+
+	def get_poster(self, obj):
+		"""Show mini photo of book."""
+		return mark_safe(f'<img src={obj.poster.url} width="90" height="110"')
+
+	get_poster.short_description = 'Poster'
 
 
 class GenreAdmin(admin.ModelAdmin):
@@ -83,9 +104,16 @@ class ReviewAdmin(admin.ModelAdmin):
 
 
 class BookShotsAdmin(admin.ModelAdmin):
-	list_display = ('title',)
+	list_display = ('id', 'title', 'get_image',)
 	list_display_links = ('title',)
 	search_fields = ('title',)
+	readonly_fields = ('get_image',)
+
+	def get_image(self, obj):
+		"""Show mini photo of book."""
+		return mark_safe(f'<img src={obj.image.url} width="50" height="70"')
+
+	get_image.short_description = 'Image'
 
 
 admin.site.register(Category, CategoryAdmin)
@@ -95,3 +123,6 @@ admin.site.register(RatingStar, StarsAdmin)
 admin.site.register(BookShots, BookShotsAdmin)
 admin.site.register(Reviews, ReviewAdmin)
 admin.site.register(Author, AuthorAdmin)
+
+admin.site.site_title = "Book e-shopper"
+admin.site.site_header = "Book e-shopper"
