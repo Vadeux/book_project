@@ -1,10 +1,20 @@
 from django.contrib import admin
 from django.utils.safestring import mark_safe  # Use to show string as HTML code.
-
+from ckeditor_uploader.widgets import CKEditorUploadingWidget  # Use to add panel in admin
+from django import forms
 from .models import Category, Genre, Book, Reviews, Rating, RatingStar, Author, BookShots
 
 
 # Register your models here.
+
+
+class BookAdminForm(forms.ModelForm):
+	description = forms.CharField(widget=CKEditorUploadingWidget())
+
+	class Meta:
+		model = Book
+		fields = '__all__'
+
 
 class CategoryAdmin(admin.ModelAdmin):
 	list_display = ('id', 'name', 'url',)
@@ -42,7 +52,9 @@ class BookAdmin(admin.ModelAdmin):
 	inlines = [BookShotsInline, ReviewInline]  # for add reviews and shots in books.
 	save_on_top = True  # Menu on top.
 	save_as = True  # Save as new object.
+	form = BookAdminForm
 	list_editable = ('draft',)  # Can edit in list of books.
+	actions = ['publish', 'unpublish']
 	fieldsets = (
 		(None, {
 			'fields': (('title',),)
@@ -64,6 +76,27 @@ class BookAdmin(admin.ModelAdmin):
 		}),
 
 	)
+
+	def unpublish(self, request, queryset):
+		"""Unpublish book."""
+		row_update = queryset.update(draft=True)
+		if row_update == 1:
+			message = '1 row update.'
+		else:
+			message = '{0} rows update.'.format(row_update)
+		self.message_user(request, message)
+
+	def publish(self, request, queryset):
+		"""Publish book."""
+		row_update = queryset.update(draft=False)
+		if row_update == 1:
+			message = '1 row update.'
+		else:
+			message = '{0} rows update.'.format(row_update)
+		self.message_user(request, message)
+
+	unpublish.allowed_permissions = ('change',)
+	publish.allowed_permissions = ('change',)
 
 	def get_poster(self, obj):
 		"""Show mini photo of book."""
