@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, DetailView
 from django.views.generic.base import View
 
-from .models import Book, Category
+from .models import Book, Category, Author
 from .forms import ReviewForm
 
 
@@ -46,3 +46,10 @@ class AddReview(View):
 			form.book = book
 			form.save()
 		return redirect(book.get_absolute_url())
+
+
+class AuthorView(DetailView):
+	"""Author page."""
+	model = Author
+	template_name = 'books/author.html'
+	slug_field = 'name'

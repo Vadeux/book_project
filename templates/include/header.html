@@ -7,6 +7,12 @@
                         <ul class="nav nav-pills">
                             <li><a href="#"><i class="fa fa-phone"></i> +375 29 169 65 05</a></li>
                             <li><a href="#"><i class="fa fa-envelope"></i> bardiervadim97@gmail.com</a></li>
+{#                            <li>#}
+{#                                <div class="search_box pull-right">#}
+{#                                    <input type="text" placeholder="Search"/>#}
+{#                                </div>#}
+{#                            </li>#}
+
                         </ul>
                     </div>
                 </div>
@@ -59,7 +65,7 @@
                     <div class="mainmenu pull-left">
                         <ul class="nav navbar-nav collapse navbar-collapse">
                             <li><a href="{% url 'book_list' %}">Главная</a></li>
-                            <li class="dropdown"><a href="#">Категирии<i class="fa fa-angle-down"></i></a>
+                            <li class="dropdown"><a href="#">Категории<i class="fa fa-angle-down"></i></a>
                                 <ul role="menu" class="sub-menu">
                                     {% for category in categories %}
                                         <li><a href="/">{{ category.name }}</a></li>

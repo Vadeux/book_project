@@ -1,5 +1,5 @@
 {% extends 'books/base.html' %}
-{% load book_tags %}
+{#{% load book_tags %}#}
 {% block content %}
     <section>
         <div class="container">
@@ -83,7 +83,7 @@
                                                     <div class="productinfo text-center">
                                                         <img src="{{ i.poster.url }}" height="250px">
                                                         <h2>${{ i.price }}</h2>
-                                                        <p>{{ i.title }}</p>
+                                                        <p><a href="{{ i.get_absolute_url }}">{{ i.title }}</a></p>
                                                         <a href="#" class="btn btn-default add-to-cart"><i
                                                                 class="fa fa-shopping-cart"></i>В корзину</a>
                                                     </div>
@@ -104,7 +104,7 @@
                                                     <div class="productinfo text-center">
                                                         <img src="{{ i.poster.url }}" height="250px">
                                                         <h2>${{ i.price }}</h2>
-                                                        <p>{{ i.title }}</p>
+                                                        <p><a href="{{ i.get_absolute_url }}">{{ i.title }}</a></p>
                                                         <a href="#" class="btn btn-default add-to-cart"><i
                                                                 class="fa fa-shopping-cart"></i>В корзину</a>
                                                     </div>

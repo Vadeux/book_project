@@ -72,6 +72,11 @@
                                         </span>
                                     <p><b>Наличие:</b> На складе</p>
                                     <p><b>Состояние:</b> Новое</p>
+                                    <p><b>Автор:</b>
+                                        {% for author in book.authors.all %}
+                                            <a href="{% url 'author_detail' author.name %}"> {{ author.name }}</a>
+                                        {% endfor %}
+                                    </p>
                                     <p><b>Год:</b> {{ book.year }}</p>
                                     <p><b>Тип обложки:</b> {{ book.cover_type }}</p>
                                     <p><b>Категория:</b>
