@@ -60,7 +60,7 @@ class BookAdmin(admin.ModelAdmin):
 			'fields': (('title',),)
 		}),
 		(None, {
-			'fields': (('authors', 'genres'),)
+			'fields': (('authors', 'genres', 'category'),)
 		}),
 		(None, {
 			'fields': (('year',),)

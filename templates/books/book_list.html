@@ -1,4 +1,5 @@
 {% extends 'books/base.html' %}
+{% load book_tags %}
 {% block content %}
     <section>
         <div class="container">
@@ -53,7 +54,7 @@
                                 <div class="product-image-wrapper">
                                     <div class="single-products">
                                         <div class="productinfo text-center">
-                                            <img src="{{ book.poster.url }}" alt=""/>
+                                            <img src="{{ book.poster.url }}" width="300" height="400" alt=""/>
                                             <a href="{{ book.get_absolute_url }}"><h2>{{ book.title }}</h2></a>
                                             <p>{{ book.price }}$</p>
                                             {% for author in book.authors.all %}
@@ -73,87 +74,47 @@
                         <div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
                             <div class="carousel-inner">
                                 <div class="item active">
-                                    <div class="col-sm-4">
-                                        <div class="product-image-wrapper">
-                                            <div class="single-products">
-                                                <div class="productinfo text-center">
-                                                    <img src="../../static/images/home/recommend1.jpg" alt=""/>
-                                                    <h2>$56</h2>
-                                                    <p>Easy Polo Black Edition</p>
-                                                    <a href="#" class="btn btn-default add-to-cart"><i
-                                                            class="fa fa-shopping-cart"></i>В корзину</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <div class="product-image-wrapper">
-                                            <div class="single-products">
-                                                <div class="productinfo text-center">
-                                                    <img src="../../static/images/home/recommend2.jpg" alt=""/>
-                                                    <h2>$56</h2>
-                                                    <p>Easy Polo Black Edition</p>
-                                                    <a href="#" class="btn btn-default add-to-cart"><i
-                                                            class="fa fa-shopping-cart"></i>В корзину</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <div class="product-image-wrapper">
-                                            <div class="single-products">
-                                                <div class="productinfo text-center">
-                                                    <img src="../../static/images/home/recommend3.jpg" alt=""/>
-                                                    <h2>$56</h2>
-                                                    <p>Easy Polo Black Edition</p>
-                                                    <a href="#" class="btn btn-default add-to-cart"><i
-                                                            class="fa fa-shopping-cart"></i>В корзину</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="col-sm-4">
-                                        <div class="product-image-wrapper">
-                                            <div class="single-products">
-                                                <div class="productinfo text-center">
-                                                    <img src="../../static/images/home/recommend1.jpg" alt=""/>
-                                                    <h2>$56</h2>
-                                                    <p>Easy Polo Black Edition</p>
-                                                    <a href="#" class="btn btn-default add-to-cart"><i
-                                                            class="fa fa-shopping-cart"></i>В корзину</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <div class="product-image-wrapper">
-                                            <div class="single-products">
-                                                <div class="productinfo text-center">
-                                                    <img src="../../static/images/home/recommend2.jpg" alt=""/>
-                                                    <h2>$56</h2>
-                                                    <p>Easy Polo Black Edition</p>
-                                                    <a href="#" class="btn btn-default add-to-cart"><i
-                                                            class="fa fa-shopping-cart"></i>В корзину</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <div class="product-image-wrapper">
-                                            <div class="single-products">
-                                                <div class="productinfo text-center">
-                                                    <img src="../../static/images/home/recommend3.jpg" alt=""/>
-                                                    <h2>$56</h2>
-                                                    <p>Easy Polo Black Edition</p>
-                                                    <a href="#" class="btn btn-default add-to-cart"><i
-                                                            class="fa fa-shopping-cart"></i>В корзину</a>
-                                                </div>
 
+
+                                    {% for i in last_books %}
+                                        <div class="col-sm-4">
+                                            <div class="product-image-wrapper">
+                                                <div class="single-products">
+                                                    <div class="productinfo text-center">
+                                                        <img src="{{ i.poster.url }}" height="250px">
+                                                        <h2>${{ i.price }}</h2>
+                                                        <p>{{ i.title }}</p>
+                                                        <a href="#" class="btn btn-default add-to-cart"><i
+                                                                class="fa fa-shopping-cart"></i>В корзину</a>
+                                                    </div>
+
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    {% endfor %}
+
+                                </div>
+
+                                <div class="item">
+
+                                    {% for i in last_last_books %}
+                                        <div class="col-sm-4">
+                                            <div class="product-image-wrapper">
+                                                <div class="single-products">
+                                                    <div class="productinfo text-center">
+                                                        <img src="{{ i.poster.url }}" height="250px">
+                                                        <h2>${{ i.price }}</h2>
+                                                        <p>{{ i.title }}</p>
+                                                        <a href="#" class="btn btn-default add-to-cart"><i
+                                                                class="fa fa-shopping-cart"></i>В корзину</a>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+
+
                                 </div>
                             </div>
                             <a class="left recommended-item-control" href="#recommended-item-carousel"

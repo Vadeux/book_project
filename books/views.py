@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, DetailView
 from django.views.generic.base import View
 
-from .models import Book
+from .models import Book, Category
 from .forms import ReviewForm
 
 
@@ -14,11 +14,23 @@ class BookListView(ListView):
 	model = Book
 	queryset = Book.objects.filter(draft=False)
 
+	def get_context_data(self, *args, **kwargs):
+		context = super().get_context_data(*args, **kwargs)
+		context['last_books'] = Book.objects.order_by('id')[:3]
+		context['last_last_books'] = Book.objects.order_by('id')[3:7]
+		context['categories'] = Category.objects.all()
+		return context
+
 
 class BookDetailView(DetailView):
 	"""One book."""
 	model = Book
 	slug_field = 'url'
+
+	def get_context_data(self, *args, **kwargs):
+		context = super().get_context_data(*args, **kwargs)
+		context['categories'] = Category.objects.all()
+		return context
 
 
 class AddReview(View):
