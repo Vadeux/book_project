@@ -1,15 +1,21 @@
+from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, DetailView
 from django.views.generic.base import View
 
-from .models import Book, Category, Author
+from .models import Book, Category, Genre, Author
 from .forms import ReviewForm
 
 
 # Create your views here.
+class GenreMixin():
+	"""For list of genres in side bar."""
+
+	def get_genres(self):
+		return Genre.objects.all()
 
 
-class BookListView(ListView):
+class BookListView(GenreMixin, ListView):
 	"""List of books."""
 	model = Book
 	queryset = Book.objects.filter(draft=False)
@@ -22,7 +28,7 @@ class BookListView(ListView):
 		return context
 
 
-class BookDetailView(DetailView):
+class BookDetailView(GenreMixin, DetailView):
 	"""One book."""
 	model = Book
 	slug_field = 'url'
@@ -48,8 +54,20 @@ class AddReview(View):
 		return redirect(book.get_absolute_url())
 
 
-class AuthorView(DetailView):
+class AuthorView(GenreMixin, DetailView):
 	"""Author page."""
 	model = Author
 	template_name = 'books/author.html'
 	slug_field = 'name'
+
+
+class FilterBooksView(GenreMixin, ListView):
+	"""Book filter."""
+
+	def get_queryset(self):
+		queryset = Book.objects.filter(
+			genres__in=self.request.GET.getlist('genre')
+		).distinct()
+		return queryset
+
+
