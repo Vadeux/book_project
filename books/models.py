@@ -61,6 +61,7 @@ class Book(models.Model):
 	number_of_pages = models.IntegerField('Number of pages')
 	genres = models.ManyToManyField(Genre, verbose_name='Genres')
 	price = models.FloatField('Price')
+	amount = models.IntegerField(default=2)
 	category = models.ForeignKey(Category, verbose_name='Category', on_delete=models.SET_NULL, null=True)
 	publishing_house = models.CharField('Publishing_house', max_length=225)
 	cover_type = models.CharField('Cover_type', max_length=225)

@@ -43,15 +43,13 @@
                                     <span>
                                             <span>{{ book.title }}</span>
                                             <br>
-                                            <label>Количество:</label>
-                                            <input type="text" value="3"/>
-                                            <button type="button" class="btn btn-fefault cart">
-                                                <i class="fa fa-shopping-cart"></i>
-                                                В корзину
-                                            </button>
+                                            <span><p>Количество : {{ book.amount }}</p></span>
+                                            <form id="form-buying-product" method="post">
+                                                            <button type="submit" class="btn btn-success btn-buy">
+                                                                В список
+                                                            </button>
+                                            </form>
                                         </span>
-                                    <p><b>Наличие:</b> На складе</p>
-                                    <p><b>Состояние:</b> Новое</p>
                                     <p><b>Автор:</b>
                                         {% for author in book.authors.all %}
                                             <a href="{% url 'author_detail' author.name %}"> {{ author.name }}</a>

@@ -43,7 +43,7 @@
                             <li><a href="#"><i class="fa fa-user"></i> Аккаунт</a></li>
                             {% if user.is_authenticated %}
                                 <li><a href="/logout"><i class="fa fa-lock"></i> Logout</a></li>
-                                <li><a href="#"><i class="fa fa-lock"></i> Change password</a></li>
+                                <li><a href="/password-change"><i class="fa fa-lock"></i> Change password</a></li>
                             {% else %}
                                 <li><a href="/login"><i class="fa fa-lock"></i> Login</a></li>
                                 <li><a href="/register"><i class="fa fa-lock"></i> Register</a></li>
@@ -88,8 +88,7 @@
                                 </ul>
                             </li>
                             <li><a href="#">Блог</a></li>
-                            <li><a href="#">О магазине</a></li>
-                            <li><a href="#">Контакты</a></li>
+                            <li><a href="/contact">Контакты</a></li>
                         </ul>
                     </div>
                 </div>
