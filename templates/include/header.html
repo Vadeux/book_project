@@ -7,6 +7,12 @@
                         <ul class="nav nav-pills">
                             <li><a href="#"><i class="fa fa-phone"></i> +375 29 169 65 05</a></li>
                             <li><a href="#"><i class="fa fa-envelope"></i> bardiervadim97@gmail.com</a></li>
+                            {#                            <li>#}
+                            {#                                <div class="search_box pull-right">#}
+                            {#                                    <input type="text" placeholder="Search"/>#}
+                            {#                                </div>#}
+                            {#                            </li>#}
+
                         </ul>
                     </div>
                 </div>
@@ -35,7 +41,22 @@
                         <ul class="nav navbar-nav">
                             <li><a href="#"><i class="fa fa-shopping-cart"></i> Корзина</a></li>
                             <li><a href="#"><i class="fa fa-user"></i> Аккаунт</a></li>
-                            <li><a href="#"><i class="fa fa-lock"></i> Вход</a></li>
+                            {% if user.is_authenticated %}
+                                <li><a href="#"><i class="fa fa-lock"></i> Logout</a></li>
+                                <li><a href="#"><i class="fa fa-lock"></i> Change password</a></li>
+                            {% else %}
+                                <li><a href="/login"><i class="fa fa-lock"></i> Login</a></li>
+                                <li><a href="/register"><i class="fa fa-lock"></i> Register</a></li>
+                            {% endif %}
+
+
+                            {% if message %}
+                                <p class="alert alert-success">
+                                    <strong>{{ message }}</strong>
+                                </p>
+                            {% endif %}
+
+
                         </ul>
                     </div>
                 </div>
@@ -59,10 +80,11 @@
                     <div class="mainmenu pull-left">
                         <ul class="nav navbar-nav collapse navbar-collapse">
                             <li><a href="{% url 'book_list' %}">Главная</a></li>
-                            <li class="dropdown"><a href="#">Магазин<i class="fa fa-angle-down"></i></a>
+                            <li class="dropdown"><a href="#">Категории<i class="fa fa-angle-down"></i></a>
                                 <ul role="menu" class="sub-menu">
-                                    <li><a href="{% url 'book_list' %}">Каталог товаров</a></li>
-                                    <li><a href="#">Корзина</a></li>
+                                    {% for category in categories %}
+                                        <li><a href="/">{{ category.name }}</a></li>
+                                    {% endfor %}
                                 </ul>
                             </li>
                             <li><a href="#">Блог</a></li>

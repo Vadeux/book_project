@@ -1,0 +1,72 @@
+{% extends 'books/base.html' %}
+{% block content %}
+    {% load static %}
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="left-sidebar">
+                        <h2>Жанры</h2>
+                        <div class="panel-group category-products" id="accordian"><!--category-productsr-->
+
+                            <form action="{% url 'filter' %}" method="get">
+
+                                {% for genre in view.get_genres %}
+
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <input type="checkbox" class="checked" name="genre"
+                                                   value="{{ genre.id}}">
+                                            <span><a href="#">{{ genre.name }}</a></span>>
+                                        </div>
+                                    </div>
+
+                                {% endfor %}
+                                <button type="submit">Найти</button>
+                            </form>
+
+                        </div><!--/category-products-->
+
+                    </div>
+                </div>
+
+                <div class="col-sm-9 padding-right">
+                    <div class="product-details"><!--product-details-->
+                        <div class="row">
+                            <div class="col-sm-5">
+                                <div class="view-product">
+                                    <img src="{{ author.image.url }}" alt=""/>
+                                </div>
+                            </div>
+                            <div class="col-sm-7">
+                                <div class="product-information">
+                                    <span>
+                                            <span>{{ author.name }}</span>
+                                            <br>
+                                    </span>
+                                    <p><b>Дата рождения:</b> {{ author.birth }}</p>
+                                    <p><b>Страна:</b> {{ author.country }}</p>
+                                    <span><b>Книги:</b>
+                                        {% for book in author.book_author.all %}
+                                            <a href="{{ book.get_absolute_url }}">{{ book.title }}</a>
+                                        {% endfor %}
+                                    </span>
+
+                                </div><!--/product-information-->
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <h5>О {{ author.name }}:</h5>
+                                <p>{{ author.description|safe }}</p>
+                            </div>
+                        </div>
+
+
+                    </div><!--/product-details-->
+
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock content %}

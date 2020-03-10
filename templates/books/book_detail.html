@@ -8,41 +8,23 @@
                     <div class="left-sidebar">
                         <h2>Жанры</h2>
                         <div class="panel-group category-products" id="accordian"><!--category-productsr-->
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4 class="panel-title"><a href="#">Жанр</a></h4>
-                                </div>
-                            </div>
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4 class="panel-title"><a href="#">Жанр</a></h4>
-                                </div>
-                            </div>
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4 class="panel-title"><a href="#">Жанр</a></h4>
-                                </div>
-                            </div>
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4 class="panel-title"><a href="#">Жанр</a></h4>
-                                </div>
-                            </div>
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4 class="panel-title"><a href="#">Жанр</a></h4>
-                                </div>
-                            </div>
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4 class="panel-title"><a href="#">Жанр</a></h4>
-                                </div>
-                            </div>
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4 class="panel-title"><a href="#">Жанр</a></h4>
-                                </div>
-                            </div>
+
+                            <form action="{% url 'filter' %}" method="get">
+
+                                {% for genre in view.get_genres %}
+
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <input type="checkbox" class="checked" name="genre"
+                                                   value="{{ genre.id }}">
+                                            <span><a href="#">{{ genre.name }}</a></span>>
+                                        </div>
+                                    </div>
+
+                                {% endfor %}
+                                <button type="submit">Найти</button>
+                            </form>
+
                         </div><!--/category-products-->
 
                     </div>
@@ -57,9 +39,7 @@
                                 </div>
                             </div>
                             <div class="col-sm-7">
-                                <div class="product-information"><!--/product-information-->
-                                    {#                                <img src="{{ book.poster.url }}" class="newarrival" alt=""/> ZOOM#}
-                                    {#                                <h2>{{ book.title }}</h2>#}
+                                <div class="product-information">
                                     <span>
                                             <span>{{ book.title }}</span>
                                             <br>
@@ -72,6 +52,11 @@
                                         </span>
                                     <p><b>Наличие:</b> На складе</p>
                                     <p><b>Состояние:</b> Новое</p>
+                                    <p><b>Автор:</b>
+                                        {% for author in book.authors.all %}
+                                            <a href="{% url 'author_detail' author.name %}"> {{ author.name }}</a>
+                                        {% endfor %}
+                                    </p>
                                     <p><b>Год:</b> {{ book.year }}</p>
                                     <p><b>Тип обложки:</b> {{ book.cover_type }}</p>
                                     <p><b>Категория:</b>
