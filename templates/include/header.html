@@ -33,7 +33,7 @@
             <div class="row">
                 <div class="col-sm-4">
                     <div class="logo pull-left">
-                        <a href="book_list.html" class="logo1"></a>
+                        <a href="/book_list.html" class="logo1"></a>
                     </div>
                 </div>
                 <div class="col-sm-8">
@@ -42,7 +42,7 @@
                             <li><a href="#"><i class="fa fa-shopping-cart"></i> Корзина</a></li>
                             <li><a href="#"><i class="fa fa-user"></i> Аккаунт</a></li>
                             {% if user.is_authenticated %}
-                                <li><a href="#"><i class="fa fa-lock"></i> Logout</a></li>
+                                <li><a href="/logout"><i class="fa fa-lock"></i> Logout</a></li>
                                 <li><a href="#"><i class="fa fa-lock"></i> Change password</a></li>
                             {% else %}
                                 <li><a href="/login"><i class="fa fa-lock"></i> Login</a></li>
