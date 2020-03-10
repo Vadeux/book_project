@@ -1,0 +1,45 @@
+{% extends 'books/base.html' %}
+{% block content %}
+    {% load static %}
+    <section id="form"><!--form-->
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4 col-sm-offset-1">
+                    <div class="login-form"><!--login form-->
+                        <h2>Login to your account</h2>
+                        <form action="#">
+                            {% csrf_token %}
+                            <input type="hidden" name="next" value="{{ next }}">
+                            {{ form }}
+                            <button type="submit" class="btn btn-success btn-block">
+                                Log in
+                            </button>
+                            <a href=".." class="btn btn-danger btn-block">
+                                Back to home
+                            </a>
+
+                        </form>
+                    </div><!--/login form-->
+                </div>
+                <div class="col-sm-1">
+                    <h2 class="or">OR</h2>
+                </div>
+{#                <div class="col-sm-4">#}
+{#                    <div class="signup-form"><!--sign up form-->#}
+{#                        <h2>New User Signup!</h2>#}
+{#                        <form action="" method="post">#}
+{#                            {% csrf_token %}#}
+{#                            {{ form }}#}
+{#                            <button type="submit" class="btn btn-success btn-block">#}
+{#                                Register#}
+{#                            </button>#}
+{#                            <a href=".." class="btn btn-danger btn-block">#}
+{#                                Back to home</a>#}
+{#                        </form>#}
+{#                    </div><!--/sign up form-->#}
+{#                </div>#}
+            </div>
+        </div>
+    </section><!--/form-->
+
+{% endblock content %}

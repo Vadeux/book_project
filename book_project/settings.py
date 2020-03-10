@@ -38,6 +38,7 @@ INSTALLED_APPS = [
 	'ckeditor_uploader',
 	'ckeditor',
 	'books',
+	'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -190,3 +191,5 @@ CKEDITOR_CONFIGS = {
 		]),
 	}
 }
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
