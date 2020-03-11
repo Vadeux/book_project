@@ -8,7 +8,7 @@ from django.http import HttpResponseRedirect
 from django.views.generic.base import View
 from django.contrib.auth import logout
 from django.contrib.auth.forms import PasswordChangeForm
-
+from cart.forms import CartAddProductForm
 
 from .models import Book, Category, Genre, Author
 from .forms import ReviewForm
@@ -43,6 +43,7 @@ class BookDetailView(GenreMixin, DetailView):
 	def get_context_data(self, *args, **kwargs):
 		context = super().get_context_data(*args, **kwargs)
 		context['categories'] = Category.objects.all()
+		context['cart_product_form'] = CartAddProductForm()
 		return context
 
 
@@ -120,5 +121,3 @@ class PasswordChangeView(FormView):
 	def form_valid(self, form):
 		form.save()
 		return super(PasswordChangeView, self).form_valid(form)
-
-

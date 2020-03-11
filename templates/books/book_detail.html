@@ -43,12 +43,23 @@
                                     <span>
                                             <span>{{ book.title }}</span>
                                             <br>
-                                            <span><p>Количество : {{ book.amount }}</p></span>
-                                            <form id="form-buying-product" method="post">
-                                                            <button type="submit" class="btn btn-success btn-buy">
-                                                                В список
-                                                            </button>
-                                            </form>
+{#                                            <span><p>Количество : {{ book.amount }}</p></span>#}
+{#                                            <form id="form-buying-product" method="post">#}
+{#                                                            <button type="submit" class="btn btn-success btn-buy">#}
+{#                                                                В список#}
+{#                                                            </button>#}
+{#                                            </form>#}
+
+
+                                        <p class="price">${{ book.price }}</p>
+                                        <form action="{% url 'cart_add' book.id %}" method="post"
+                                              id="form-buying-product">
+                                            {{ cart_product_form }}
+                                            {% csrf_token %}
+                                            <input type="submit" value="Add to cart" class="btn btn-success btn-buy">
+                                        </form>
+
+
                                         </span>
                                     <p><b>Автор:</b>
                                         {% for author in book.authors.all %}

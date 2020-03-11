@@ -10,6 +10,7 @@ body {
     background;
     position: relative;
     font-weight: 400px;
+    padding-bottom: 58px;
 }
 
 .logo1 {
@@ -351,6 +352,9 @@ ul.sub-menu {
 
 #footer {
     background: #F0F0E9;
+    position: absolute;
+    bottom: 0;
+    height: 58px;
 }
 
 

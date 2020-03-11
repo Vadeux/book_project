@@ -39,7 +39,21 @@
                 <div class="col-sm-8">
                     <div class="shop-menu pull-right">
                         <ul class="nav navbar-nav">
-                            <li><a href="#"><i class="fa fa-shopping-cart"></i> Корзина</a></li>
+
+                            <li>
+                                {% with total_items=cart|length %}
+                                    {% if cart|length > 0 %}
+                                        <a href="{% url "cart_detail" %}">
+                                            {{ total_items }} item{{ total_items|pluralize }},
+                                            ${{ cart.get_total_price }}
+                                        </a>
+                                    {% else %}
+                                        Ваша карзина пуста :(
+                                    {% endif %}
+                                {% endwith %}
+                            </li>
+
+
                             <li><a href="#"><i class="fa fa-user"></i> Аккаунт</a></li>
                             {% if user.is_authenticated %}
                                 <li><a href="/logout"><i class="fa fa-lock"></i> Logout</a></li>

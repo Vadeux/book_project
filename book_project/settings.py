@@ -39,6 +39,7 @@ INSTALLED_APPS = [
 	'ckeditor',
 	'books',
 	'crispy_forms',
+	'cart',
 ]
 
 MIDDLEWARE = [
@@ -65,6 +66,7 @@ TEMPLATES = [
 				'django.template.context_processors.request',
 				'django.contrib.auth.context_processors.auth',
 				'django.contrib.messages.context_processors.messages',
+				'cart.context_processors.cart',
 			],
 		},
 	},
@@ -194,3 +196,4 @@ CKEDITOR_CONFIGS = {
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
+CART_SESSION_ID = 'cart'
