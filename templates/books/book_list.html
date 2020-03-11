@@ -42,12 +42,7 @@
                                             {% for author in book.authors.all %}
                                                 <p>{{ author.name }}</p>
                                             {% endfor %}
-                                            <form id="form-buying-product" method="post">
-                                                <button type="submit" class="btn  btn-buy">
-                                                    В список
-                                                </button>
-                                            </form>
-                                        </div>
+                                            </div>
                                     </div>
                                 </div>
                             </div>
@@ -68,13 +63,7 @@
                                                         <img src="{{ i.poster.url }}" height="250px">
                                                         <h2>${{ i.price }}</h2>
                                                         <p><a href="{{ i.get_absolute_url }}">{{ i.title }}</a></p>
-                                                        <form id="form-buying-product" action="../cart/cart.html" method="post">
-                                                            <button type="submit" class="btn  btn-buy">
-                                                                В список
-                                                            </button>
-                                                        </form>
                                                     </div>
-
                                                 </div>
                                             </div>
                                         </div>
