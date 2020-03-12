@@ -43,13 +43,6 @@
                                     <span>
                                             <span>{{ book.title }}</span>
                                             <br>
-{#                                            <span><p>Количество : {{ book.amount }}</p></span>#}
-{#                                            <form id="form-buying-product" method="post">#}
-{#                                                            <button type="submit" class="btn btn-success btn-buy">#}
-{#                                                                В список#}
-{#                                                            </button>#}
-{#                                            </form>#}
-
 
                                         <p class="price">${{ book.price }}</p>
                                         <form action="{% url 'cart_add' book.id %}" method="post"
@@ -82,20 +75,23 @@
                                     <p><b>Количество страниц:</b> {{ book.number_of_pages }}</p>
                                     <p><b>Издательство:</b>{{ book.publishing_house }}</p>
                                     <div style="list-style: none">
-                                        <a href="#"><b>Рейтинг:</b>
-                                            <span class="fa fa-star" aria-hidden="true"
-                                                  style="outline: none; cursor: inherit;"></span>
-                                            <span class="fa fa-star" aria-hidden="true"
-                                                  style="outline: none; cursor: inherit;"></span>
-                                            <span class="fa fa-star" aria-hidden="true"
-                                                  style="outline: none; cursor: inherit;"></span>
-                                            <span class="fa fa-star" aria-hidden="true"
-                                                  style="outline: none; cursor: inherit;"></span>
-                                            <span class="fa fa-star" aria-hidden="true"
-                                                  style="outline: none; cursor: inherit;"></span>
-                                            <span class="editContent"
-                                                  style="outline: none; cursor: inherit;">5.0</span>
-                                        </a>
+
+                                        <form action="{% url 'add_rating' %}" method="POST" name="rating" >
+
+                                            <b>Рейтинг:</b>
+                                            {% csrf_token %}
+                                            <input type="hidden" value="{{ request.path }}" name="next">
+                                            <input type="hidden" value="{{ book.id }}" name="book">
+                                            <span class="rating">
+                                                {% for key,value in star_form.fields.star.choices %}
+                                                    <input id="rating{{ value }}" type="radio" name="star"
+                                                           value="{{ key }}">
+                                                    <label for='rating{{ value }}'>{{ key }}</label>
+                                                {% endfor %}
+                                            </span>
+                                        </form>
+
+
                                     </div>
                                 </div><!--/product-information-->
                             </div>

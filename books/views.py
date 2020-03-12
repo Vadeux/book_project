@@ -4,14 +4,14 @@ from django.views.generic import ListView, DetailView
 from django.views.generic.edit import FormView
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.views.generic.base import View
 from django.contrib.auth import logout
 from django.contrib.auth.forms import PasswordChangeForm
-from cart.forms import CartAddProductForm
 
-from .models import Book, Category, Genre, Author
-from .forms import ReviewForm
+from cart.forms import CartAddProductForm
+from .models import Book, Category, Genre, Author, Rating
+from .forms import ReviewForm, RatingForm
 
 
 # Create your views here.
@@ -43,6 +43,7 @@ class BookDetailView(GenreMixin, DetailView):
 	def get_context_data(self, *args, **kwargs):
 		context = super().get_context_data(*args, **kwargs)
 		context['categories'] = Category.objects.all()
+		context['star_form'] = RatingForm()
 		context['cart_product_form'] = CartAddProductForm()
 		return context
 
@@ -121,3 +122,27 @@ class PasswordChangeView(FormView):
 	def form_valid(self, form):
 		form.save()
 		return super(PasswordChangeView, self).form_valid(form)
+
+
+class AddStarRating(View):
+	"""Add book rating."""
+
+	def get_client_ip(self, request):
+		x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+		if x_forwarded_for:
+			ip = x_forwarded_for.split(',')[0]
+		else:
+			ip = request.META.get('REMOTE_ADDR')
+		return ip
+
+	def post(self, request):
+		form = RatingForm(request.POST)
+		if form.is_valid():
+			Rating.objects.update_or_create(
+				ip=self.get_client_ip(request),
+				book_id=int(request.POST.get("book")),
+				defaults={'star_id': int(request.POST.get("star"))}
+			)
+			return HttpResponse(status=201)
+		else:
+			return HttpResponse(status=400)

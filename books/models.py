@@ -123,11 +123,12 @@ class RatingStar(models.Model):
 
 	def __str__(self):
 		"""String representation."""
-		return self.value
+		return str(self.value)
 
 	class Meta:
 		verbose_name = "Star"
 		verbose_name_plural = "Stars"
+		ordering = ['-value']
 
 
 class Rating(models.Model):
@@ -142,4 +143,4 @@ class Rating(models.Model):
 
 	class Meta:
 		verbose_name = "Rating"
-		verbose_name_plural = "Rating"
+		verbose_name_plural = "Ratings"

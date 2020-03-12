@@ -118,7 +118,7 @@ class StarsAdmin(admin.ModelAdmin):
 
 
 class RatingAdmin(admin.ModelAdmin):
-	list_display = ('ip',)
+	list_display = ('star', 'book', 'ip',)
 	list_display_links = ('ip',)
 	search_fields = ('ip',)
 
