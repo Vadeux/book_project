@@ -1,5 +1,7 @@
 from django.shortcuts import render
-from .models import OrderItem
+from django.views.generic import ListView
+
+from .models import OrderItem,Order
 from .forms import OrderCreateForm
 from cart.cart import Cart
 
@@ -23,3 +25,9 @@ def order_create(request):
         form = OrderCreateForm
     return render(request, 'orders/order/create.html',
                   {'cart': cart, 'form': form})
+
+
+class OrderListView(ListView):
+    model = Order
+    queryset = Order.objects.all()
+    template_name = 'orders.html'

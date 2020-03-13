@@ -1,0 +1,66 @@
+{% extends 'books/base.html' %}
+{% load static %}
+{% block content %}
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="left-sidebar">
+                        <img src="{% static '/images/shelf.jpg' %}" width="250px" height="700">
+                    </div>
+                </div>
+
+
+                <div class="col-sm-9 padding-right">
+
+
+                    {% if user.is_staff %}
+
+
+                        {% if message %}
+                            <p class="alert alert-success">
+                                <strong>{{ message }}</strong>
+                            </p>
+                        {% endif %}
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <form action="../add_post/" method="post">
+                                    {% csrf_token %}
+                                    <h5>Add post:</h5>
+
+                                    <div class="mb-3">
+                                        <input class="form-control"
+                                               placeholder="Заголовок поста"
+                                               name="title"
+                                               required/>
+                                        <br>
+                                        <input class="form-control"
+                                               placeholder="Текст поста"
+                                               name="text"
+                                               required/>
+                                    </div>
+                                <br>
+                                    <div class="mb-3">
+                                        <button class="btn btn-success">
+                                            Опубликовать
+                                        </button>
+                                    </div>
+                                    <input type="hidden"
+                                           name="post_id"
+                                           value="0"/>
+                                </form>
+                            </div>
+                        </div>
+
+                    {% else %}
+                        <h4>Access denied.</h4>
+                    {% endif %}
+
+                </div>
+
+
+            </div>
+        </div>
+    </section>
+{% endblock content %}
+

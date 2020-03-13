@@ -1,0 +1,48 @@
+{% extends 'books/base.html' %}
+{% load static %}
+{% block content %}
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="left-sidebar">
+                        <img src="{% static '/images/shelf.jpg' %}" width="250px" height="700px">
+                    </div>
+                </div>
+                <div class="col-sm-9">
+                    <div class="blog-post-area">
+                        <h2 class="title text-center">Запись в блоге</h2>
+
+
+                        <div class="single-blog-post">
+                            <h3>{{ post.title }}</h3>
+                            <div class="post-meta">
+                                <ul>
+                                    <li><i class="fa fa-calendar"></i>{{ post.reg_date }}</li>
+                                </ul>
+                            </div>
+                            <p>
+                                {{ post.text }}
+                            </p> <br>
+                            <p>Автор: {{ post.author }}</p>
+
+{#                            {% for member in blog.members.all %}#}
+{#                                <p> member {{ member }}</p>#}
+{#                            {% endfor %}#}
+
+
+                            <div class="pager-area">
+                                <div class="pager pull-right">
+                                    <a href="{% url 'post_list' %}">Назад в блог</a>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div><!--/blog-post-area-->
+
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock content %}

@@ -1,0 +1,37 @@
+{% extends 'books/base.html' %}
+{% load static %}
+{% block content %}
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="left-sidebar">
+                        <img src="{% static '/images/shelf.jpg' %}" width="250px" height="700">
+                    </div>
+                </div>
+                <div class="col-sm-9">
+                    <div class="blog-post-area">
+
+                    {% for order in object_list %}
+
+                        <ul style="border: solid black 1px">
+                            <li>first_name : {{ order.first_name }}</li>
+                            <li>last_name : {{ order.last_name }}</li>
+                            <li>email : {{ order.email }}</li>
+                            <li>address : {{ order.address }}</li>
+                            <li>postal_code : {{ order.postal_code }}</li>
+                            <li>city : {{ order.city }}</li>
+                            <li>created : {{ order.created }}</li>
+                            <li>updated : {{ order.updated }}</li>
+                            <li>paid : {{ order.paid }}</li>
+                        </ul>
+                        <br>
+                    {% endfor %}
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock content %}

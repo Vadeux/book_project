@@ -43,14 +43,16 @@
                                     <span>
                                             <span>{{ book.title }}</span>
                                             <br>
-
                                         <p class="price">${{ book.price }}</p>
+
+                                        {% if user.is_authenticated %}
                                         <form action="{% url 'cart_add' book.id %}" method="post"
                                               id="form-buying-product">
                                             {{ cart_product_form }}
                                             {% csrf_token %}
                                             <input type="submit" value="Add to cart" class="btn btn-success btn-buy">
                                         </form>
+                                        {% endif %}
 
 
                                         </span>
