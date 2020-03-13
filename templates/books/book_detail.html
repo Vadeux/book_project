@@ -43,7 +43,7 @@
                                     <span>
                                             <span>{{ book.title }}</span>
                                             <br>
-                                        <p class="price">${{ book.price }}</p>
+
 
                                         {% if user.is_authenticated %}
                                         <form action="{% url 'cart_add' book.id %}" method="post"
@@ -55,7 +55,8 @@
                                         {% endif %}
 
 
-                                        </span>
+                                    </span>
+                                <p class="price">${{ book.price }}</p>
                                     <p><b>Автор:</b>
                                         {% for author in book.authors.all %}
                                             <a href="{% url 'author_detail' author.name %}"> {{ author.name }}</a>

@@ -26,6 +26,7 @@ class BookListView(GenreMixin, ListView):
 	"""List of books."""
 	model = Book
 	queryset = Book.objects.filter(draft=False)
+	paginate_by = 6
 
 	def get_context_data(self, *args, **kwargs):
 		context = super().get_context_data(*args, **kwargs)
