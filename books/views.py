@@ -1,3 +1,5 @@
+from django import forms
+from django.utils.translation import gettext, gettext_lazy as _
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import AuthenticationForm
 from django.views.generic import ListView, DetailView
@@ -160,3 +162,41 @@ class Search(ListView):
 		context = super().get_context_data(*args, **kwargs)
 		context['q'] = 'q={0}&'.format(self.request.GET.get('q'))
 		return context
+
+
+class SubscribeForm(forms.Form):
+	email = forms.EmailField(
+		label=_("E-mail"),
+		required=True,
+	)
+
+	def __init__(self, user, *args, **kwargs):
+		self.user = user
+		super().__init__(*args, **kwargs)
+
+	def save(self, commit=True):
+		self.user.email = self.cleaned_data["email"]
+		if commit:
+			self.user.save()
+		return self.user
+
+
+class SubscribeView(FormView):
+	form_class = SubscribeForm
+	template_name = 'subscribe.html'
+	success_url = '/'
+
+	def get_form_kwargs(self):
+		kwargs = super().get_form_kwargs()
+		kwargs['user'] = self.request.user
+		return kwargs
+
+	def form_valid(self, form):
+		form.save()
+		return HttpResponseRedirect(self.success_url)
+
+
+def unsubscribe(request):
+	request.user.email = ''
+	request.user.save()
+	return HttpResponseRedirect('/')

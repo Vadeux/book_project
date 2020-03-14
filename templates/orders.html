@@ -25,8 +25,11 @@
                                 <li>Заказ изменен : {{ order.updated }}</li>
                                 <li>Оплата : {{ order.paid }}</li>
                                 <h4> Товары : </h4>
+{#                                {% items = order_items.get(order_id) %}#}
                                 {% for item in order_items %}
-                                    <li>{{ item.product }}</li>
+                                    {% if item.order_id == order.id %}
+                                        <li>{{ item.product }}</li>
+                                    {% endif %}
                                 {% endfor %}
 
                             </ul>

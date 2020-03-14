@@ -201,3 +201,10 @@ CKEDITOR_CONFIGS = {
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 CART_SESSION_ID = 'cart'
+
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'shopmanage7@gmail.com'
+EMAIL_HOST_PASSWORD = 'M2t8zUmPQg'
+EMAIL_PORT = 465
+EMAIL_USE_SSL = True

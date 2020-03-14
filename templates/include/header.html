@@ -42,7 +42,8 @@
                                             ${{ cart.get_total_price }}
                                         </a>
                                     {% else %}
-                                        Ваша карзина пуста :(
+                                        <li>Ваша карзина пуста :(
+                                        <li>
                                     {% endif %}
                                 {% endwith %}
                                 </li>
@@ -52,6 +53,12 @@
                             {% if user.is_authenticated %}
                                 <li><a href="{% url 'logout' %}"><i class="fa fa-lock"></i> Выход</a></li>
                                 <li><a href="{% url 'pass-change' %}"><i class="fa fa-lock"></i> Смена пароля</a></li>
+                                {% if user.email == '' %}
+                                    <li><a href="{% url 'subscribe' %}"><i class="fa fa-user"></i>Указать email</a></li>
+                                {% else %}
+                                    <li><a href="{% url 'unsubscribe' %}"><i class="fa fa-user"></i>Убрать email</a></li>
+                                {% endif %}
+
                                 <li>{% if user.is_staff %}
                                     <a href="/blog/admin"><i class="fa fa-user"></i>Добавить пост</a>
                                 {% endif %}</li>
@@ -91,7 +98,7 @@
                         </button>
                     </div>
                     <div class="mainmenu pull-left">
-                        <ul class="nav navbar-nav collapse navbar-collapse" >
+                        <ul class="nav navbar-nav collapse navbar-collapse">
                             <li><a href="{% url 'book_list' %}">Главная</a></li>
                             <li class="dropdown"><a href="#">Категории<i class="fa fa-angle-down"></i></a>
                                 <ul role="menu" class="sub-menu">
@@ -101,9 +108,9 @@
                                 </ul>
                             </li>
                             <li><a href="{% url 'post_list' %}">Блог</a></li>
-                                {% if user.is_staff %}
-                                    <li><a href="{% url 'orders_list' %}"><i class="fa "></i>Заказы</a></li>
-                                {% endif %}
+                            {% if user.is_staff %}
+                                <li><a href="{% url 'orders_list' %}"><i class="fa "></i>Заказы</a></li>
+                            {% endif %}
                         </ul>
                     </div>
                 </div>
