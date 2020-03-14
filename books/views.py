@@ -149,4 +149,14 @@ class AddStarRating(View):
 			return HttpResponse(status=400)
 
 
+class Search(ListView):
+	"""Class for searching in side bar."""
+	paginate_by = 2
 
+	def get_queryset(self):
+		return Book.objects.filter(title__icontains=self.request.GET.get('q'))
+
+	def get_context_data(self, *args, **kwargs):
+		context = super().get_context_data(*args, **kwargs)
+		context['q'] = 'q={0}&'.format(self.request.GET.get('q'))
+		return context

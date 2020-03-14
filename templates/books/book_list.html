@@ -6,6 +6,21 @@
             <div class="row">
                 <div class="col-sm-3">
                     <div class="left-sidebar">
+
+
+                        <div class="search-bar w3layouts-newsletter">
+                            <h3 class="sear-head editContent">Поиск фильма</h3>
+                            <form action="{% url 'search' %}" method="get" class="d-flex editContent">
+
+                                <input type="search" placeholder="Введите название..." name="q" class="form-control"
+                                       required="">
+                                <button type="submit" class="btn1 btn">
+                                    <span class="fa fa-search" aria-hidden="true"></span>
+                                </button>
+                            </form>
+                        </div>
+
+
                         <h2>Жанры</h2>
                         <div class="panel-group category-products" id="accordian"><!--category-productsr-->
 
@@ -42,20 +57,18 @@
                                             {% for author in book.authors.all %}
                                                 <p>{{ author.name }}</p>
                                             {% endfor %}
-                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         {% endfor %}
 
 
-
-
                     </div><!--features_items-->
 
-                <div class="grid-img-right mt-4 text-right bg bg1">
-                    {% include 'include/pagination.html' %}
-                </div>
+                    <div class="grid-img-right mt-4 text-right bg bg1">
+                        {% include 'include/pagination.html' %}
+                    </div>
 
                     <div class="recommended_items"><!--recommended_items-->
                         <h2 class="title text-center">Рекомендуемые книги</h2>
@@ -90,8 +103,7 @@
                                                         <img src="{{ i.poster.url }}" height="250px">
                                                         <h2>${{ i.price }}</h2>
                                                         <p><a href="{{ i.get_absolute_url }}">{{ i.title }}</a></p>
-                                                        <a href="#" class="btn btn-default add-to-cart"><i
-                                                                class="fa fa-shopping-cart"></i>В список</a>
+
                                                     </div>
 
                                                 </div>

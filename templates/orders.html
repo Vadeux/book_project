@@ -12,21 +12,26 @@
                 <div class="col-sm-9">
                     <div class="blog-post-area">
 
-                    {% for order in object_list %}
+                        {% for order in object_list %}
 
-                        <ul style="border: solid black 1px">
-                            <li>first_name : {{ order.first_name }}</li>
-                            <li>last_name : {{ order.last_name }}</li>
-                            <li>email : {{ order.email }}</li>
-                            <li>address : {{ order.address }}</li>
-                            <li>postal_code : {{ order.postal_code }}</li>
-                            <li>city : {{ order.city }}</li>
-                            <li>created : {{ order.created }}</li>
-                            <li>updated : {{ order.updated }}</li>
-                            <li>paid : {{ order.paid }}</li>
-                        </ul>
-                        <br>
-                    {% endfor %}
+                            <ul style="border: solid black 1px">
+                                <li>Имя : {{ order.first_name }}</li>
+                                <li>Фамилия : {{ order.last_name }}</li>
+                                <li>email : {{ order.email }}</li>
+                                <li>Адресс : {{ order.address }}</li>
+                                <li>Почтовый индекс : {{ order.postal_code }}</li>
+                                <li>Город : {{ order.city }}</li>
+                                <li>Заказ оформлен : {{ order.created }}</li>
+                                <li>Заказ изменен : {{ order.updated }}</li>
+                                <li>Оплата : {{ order.paid }}</li>
+                                <h4> Товары : </h4>
+                                {% for item in order_items %}
+                                    <li>{{ item.product }}</li>
+                                {% endfor %}
+
+                            </ul>
+                            <br>
+                        {% endfor %}
 
 
                     </div>

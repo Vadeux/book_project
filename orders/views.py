@@ -31,3 +31,9 @@ class OrderListView(ListView):
     model = Order
     queryset = Order.objects.all()
     template_name = 'orders.html'
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['orders'] = Order.objects.all()
+        context['order_items'] = OrderItem.objects.all()
+        return context
