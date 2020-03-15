@@ -1,9 +1,7 @@
-# from django.http import HttpResponseRedirect
+
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_POST
-# from django import forms
-# from django.utils.translation import gettext, gettext_lazy as _
-# from django.views.generic import FormView
+
 
 from books.models import Book
 from .cart import Cart
