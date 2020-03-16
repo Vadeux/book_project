@@ -33,7 +33,7 @@
                 <div class="col-sm-8">
                     <div class="shop-menu pull-right">
                         <ul class="nav navbar-nav">
-
+{% if user.is_authenticated %}
                             <li>
                                 {% with total_items=cart|length %}
                                     {% if cart|length > 0 %}
@@ -47,6 +47,7 @@
                                     {% endif %}
                                 {% endwith %}
                                 </li>
+{% endif %}
 
 
 
