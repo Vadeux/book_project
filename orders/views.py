@@ -1,9 +1,8 @@
 from django.core.mail import send_mail
 from django.shortcuts import render
 from django.views.generic import ListView
-from smtplib import SMTPRecipientsRefused,SMTPException
 
-from .models import OrderItem,Order
+from .models import OrderItem, Order
 from .forms import OrderCreateForm
 from cart.cart import Cart
 
@@ -46,6 +45,7 @@ def order_create(request):
                   {'cart': cart, 'form': form})
 
 
+
 class OrderListView(ListView):
     model = Order
     queryset = Order.objects.all()
@@ -56,4 +56,5 @@ class OrderListView(ListView):
         context['orders'] = Order.objects.all()
         context['order_items'] = OrderItem.objects.all()
         return context
+
 
