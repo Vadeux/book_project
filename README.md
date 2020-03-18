@@ -18,6 +18,7 @@ Simple steps to installing the project :
 
 2.[Not necessary]Download and install Pycharm profesional edition(it has built-in webserver)
 	https://www.jetbrains.com/
+	
 3.Clone this repository.
 type : git clone https://github.com/GithubHungry/book_project
 
