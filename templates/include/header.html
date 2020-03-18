@@ -52,6 +52,9 @@
 
 
                             {% if user.is_authenticated %}
+
+                                <li><a href="{% url 'account_detail' user.pk %}"><i class="fa fa-user"></i> Аккаунт</a></li>
+
                                 <li><a href="{% url 'logout' %}"><i class="fa fa-lock"></i> Выход</a></li>
                                 <li><a href="{% url 'pass-change' %}"><i class="fa fa-lock"></i> Смена пароля</a></li>
                                 {% if user.email == '' %}

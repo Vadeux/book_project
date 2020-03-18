@@ -10,10 +10,12 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.views.generic.base import View
 from django.contrib.auth import logout
 from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth.models import User
 
 from cart.forms import CartAddProductForm
 from .models import Book, Category, Genre, Author, Rating
 from .forms import ReviewForm, RatingForm
+from orders.models import OrderItem, Order
 
 
 # Create your views here.
@@ -200,3 +202,26 @@ def unsubscribe(request):
 	request.user.email = ''
 	request.user.save()
 	return HttpResponseRedirect('/')
+
+
+# class Account(View):
+# 	"""For personal account."""
+#
+# 	def get(self, request, pk):
+# 		user = User.objects.get(id=pk)
+# 		items = OrderItem.objects.all()
+# 		orders = Order.objects.all()
+# 		return render(request, 'books/account_detail.html', {'user': user, 'items': items, 'orders': orders})
+
+
+class Account(DetailView):
+	"""Author page."""
+	model = User
+	template_name = 'books/account_detail.html'
+	slug_field = 'pk'
+
+	def get_context_data(self, *args, **kwargs):
+		context = super().get_context_data(*args, **kwargs)
+		context['items'] = OrderItem.objects.all()
+		context['orders'] = Order.objects.all()
+		return context

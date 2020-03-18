@@ -1,0 +1,50 @@
+{% extends 'books/base.html' %}
+{% block content %}
+    {% load static %}
+    <section>
+        <div class="container">
+            <div class="row">
+
+
+                <div class="col-sm-9 padding-right" style="border: 1px solid black">
+                    <div class="product-details"><!--product-details-->
+
+                        <h2>Username : {{ user.username }}</h2>
+                        <br>
+                        <br>
+                        <h3>Идентификационный номер:{{ user.id }}</h3>
+                        {% if user.email %}
+                            {{ user.email }}
+                        {% endif %}
+                        {% if user.is_staff %}
+                            <p>Роль is_staff :{{ user.is_staff }}</p>
+                        {% endif %}
+
+                    </div>
+                    <div class="col-sm-9 padding-right" style="border: 1px solid black">
+                        <h3>История покупок</h3>
+                        {% for order in orders %}
+                            {% if user.email == order.email %}
+                                <div style="border: 1px solid black">
+                                <p>Номер заказа: {{ order.id }}</p>
+                                <p>Дата оформления заказа : {{ order.created }}</p>
+                                {% for item in items %}
+                                    {% if order.id == item.order_id %}
+                                        <ul>
+                                            <li>Наименование : {{ item.product }}</li>
+                                            <li>Количество : {{ item.quantity }} шт</li>
+                                            <li>Цена за единицу : {{ item.price }}$</li>
+                                        </ul>
+                                    {% endif %}
+
+                                {% endfor %}
+
+                            {% endif %}
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock content %}
