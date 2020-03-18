@@ -204,15 +204,6 @@ def unsubscribe(request):
 	return HttpResponseRedirect('/')
 
 
-# class Account(View):
-# 	"""For personal account."""
-#
-# 	def get(self, request, pk):
-# 		user = User.objects.get(id=pk)
-# 		items = OrderItem.objects.all()
-# 		orders = Order.objects.all()
-# 		return render(request, 'books/account_detail.html', {'user': user, 'items': items, 'orders': orders})
-
 
 class Account(DetailView):
 	"""Author page."""
