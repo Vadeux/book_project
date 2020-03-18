@@ -16,7 +16,7 @@ Simple steps to installing the project :
 1.Download latest version of python and install it!
 	https://www.python.org/
 
-2.[Not necessary]Download and install Pycharm profesional edition(it has built-in webserver)
+2.`[Not necessary]` Download and install Pycharm profesional edition(it has built-in webserver)
 	https://www.jetbrains.com/
 	
 3.Clone this repository.
