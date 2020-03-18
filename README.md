@@ -7,7 +7,7 @@ E-shopper is a website for selling books and publishing awesome news about every
 
 ### Prerequisites
 
-The minimum requirement by e-shopper is that your Web server supports Django 2.1.0 or above + python 3.6+. 
+The minimum requirement by e-shopper is that your Web server supports Django 2.1.0 or above and python 3.6+. 
 
 ### Installing
 
