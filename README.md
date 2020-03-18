@@ -38,7 +38,7 @@ Example : http://vbardier.pythonanywhere.com/
 
 ## Versioning
 
-1.0 - 18.03.2020 release
+1.0.0 - 18.03.2020 release
 
 ## Authors
 
